@@ -19,7 +19,7 @@
                         {{ __('Posts') }}
                     </x-nav-link>
                     <x-nav-link :href="route('user')" :active="request()->routeIs('user')">
-                        {{ __('Users') }}
+                        {{ __('Usuários') }}
                     </x-nav-link>
                 </div>
             </div>
