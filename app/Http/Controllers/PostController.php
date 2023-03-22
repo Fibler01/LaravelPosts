@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -13,7 +14,8 @@ class PostController extends Controller
     {
         //
         $title = "Posts Page";
-        return view('post', ["title"=>$title]); /* passando o titulo para a view post */
+        $posts = Post::paginate(4);
+        return view('posts.post', ["title"=>$title, "posts"=>$posts]); /* passando o titulo para a view post */
     }
 
     /**
@@ -30,6 +32,17 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $valid = $request->validate([ /* definindo regras para validar form */
+            'title' => 'required|unique:posts|max:100', /* verificar se outras pessoas n vao poder criar post com o mesmo titulo */
+            'post_content' => 'min:10'
+        ]);
+        $post = Post::create([
+            'title' => $request->title,
+            'content' => $request->post_content,
+            'user_id' => auth()->user()->id
+        ]);
+
+        return redirect('/post');
     }
 
     /**

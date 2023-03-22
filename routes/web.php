@@ -27,6 +27,10 @@ Route::get('/dashboard', function () {
 /* seguindo padrao mvc, model view controller */
 Route::get('/post', [PostController::class, 'index'])->middleware(['auth'])->name('post');
 
+Route::view('/post/new', 'posts.form')->middleware(['auth'])->name('new-post');
+
+Route::post('/post/create', [PostController::class, 'store'])->middleware(['auth']);
+
 Route::get('/user', [UserController::class, 'index'])->middleware(['auth'])->name('user');
 
 Route::middleware('auth')->group(function () {
