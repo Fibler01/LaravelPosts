@@ -13,8 +13,9 @@ class PostController extends Controller
     public function index()
     {
         //
-        $title = "Posts Page";
-        $posts = Post::paginate(4);
+        $title = "Página de posts";
+        $userId = auth()->user()->id;
+        $posts = Post::where('user_id', $userId)->paginate(4);
         return view('posts.post', ["title"=>$title, "posts"=>$posts]); /* passando o titulo para a view post */
     }
 
