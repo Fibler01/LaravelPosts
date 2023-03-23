@@ -24,6 +24,9 @@ class PostController extends Controller
     public function create()
     {
         //
+        $flag = "new";
+        $route = "/post/create";
+        return view('posts.form', ['flag'=>$flag, 'route'=>$route]);
     }
 
     /**
@@ -51,6 +54,9 @@ class PostController extends Controller
     public function show(string $id)
     {
         //
+        $post = Post::find($id);
+        $title = "Visualizar post";
+        return view('posts.single', ['title'=>$title, 'post'=>$post]);
     }
 
     /**
@@ -59,6 +65,10 @@ class PostController extends Controller
     public function edit(string $id)
     {
         //
+        $route = "/post/update/$id";
+        $flag = "modify";
+        $post = Post::find($id);
+        return view('posts.form', ['route'=>$route, 'flag'=>$flag, 'post'=>$post]);
     }
 
     /**
@@ -67,6 +77,18 @@ class PostController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $valid = $request->validate([ /* definindo regras para validar form */
+            'title' => 'required|max:100', /* verificar se outras pessoas n vao poder criar post com o mesmo titulo */
+            'post_content' => 'min:10'
+        ]);
+
+        $post = Post::find($id);
+        $post->title = $request->title;
+        $post->content = $request->post_content;
+        $post->update();
+
+        return redirect('/post');
+
     }
 
     /**
@@ -75,5 +97,8 @@ class PostController extends Controller
     public function destroy(string $id)
     {
         //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('/post');
     }
 }

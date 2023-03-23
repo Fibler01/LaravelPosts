@@ -25,10 +25,11 @@
                             @foreach ($posts as $post)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $post->id }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $post->title }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap"><a href="post/view/{{$post->id}}">{{ $post->title }}</a></td>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $post->content }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="/post/edit/{{$post->id}}" class="text-indigo-600 hover:text-indigo-900">Editar</a>
+                                        <a href="/post/edit/{{$post->id}}" class="text-indigo-600 hover:text-indigo-900">Editar</a> /
+                                        <a href="/post/delete/{{$post->id}}" style="color: red" class="text-indigo-600 hover:text-indigo-900">Excluir</a>
                                     </td>
                                 </tr>
                             @endforeach
