@@ -12,31 +12,31 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <table>
+                    <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Título</th>
-                                <th>Conteúdo</th>
-                                <th>Ações</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Conteúdo</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="bg-white divide-y divide-gray-200">
                             @foreach ($posts as $post)
                                 <tr>
-                                    <td>{{ $post->id }}</td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ $post->content }}</td>
-                                    <td>
-                                        <a href="/post/edit/{{$post->id}}">Editar</a>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $post->id }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $post->title }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $post->content }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <a href="/post/edit/{{$post->id}}" class="text-indigo-600 hover:text-indigo-900">Editar</a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{$posts->links()}}
+                    <div class="mt-4">{{ $posts->links() }}</div>
                 </div>
             </div>
         </div>
-    </div>
+
 </x-app-layout>
